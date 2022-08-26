@@ -12,6 +12,7 @@
   border-radius: 2px;
   border: 1px solid #47cf7388;
   margin-bottom: 4px;
+  touch-action: none;
 }
 
 button {

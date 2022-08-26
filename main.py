@@ -7,8 +7,8 @@ app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-templates = Jinja2Templates(directory="templates")
-
-@app.get("/", response_class=HTMLResponse)
+templates = Jinja2Templates(directory="templates") 
+ 
+@app.get("/", response_class=HTMLResponse) 
 async def simulator_app(request: Request):
   return templates.TemplateResponse("pages/simulator.html", {"request": request}) 

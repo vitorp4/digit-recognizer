@@ -8,11 +8,11 @@ var drawMode = false;
 window.addEventListener('load', resizeCanvas(1));
 window.addEventListener('load', drawGrid());
 
-canvas.addEventListener("mousedown", () => (drawMode = true));
-canvas.addEventListener("mouseup", () => (drawMode = false));
-canvas.addEventListener("mouseout", () => (drawMode = false));
+canvas.addEventListener("pointerdown", () => (drawMode = true));
+canvas.addEventListener("pointerup", () => (drawMode = false));
+canvas.addEventListener("pointerout", () => (drawMode = false));
 
-canvas.addEventListener("mousemove", (ev) => {
+canvas.addEventListener("pointermove", (ev) => {
   if (drawMode) {
     var x = Math.floor(ev.offsetX / pixelSize);
     var y = Math.floor(ev.offsetY / pixelSize);
@@ -70,7 +70,7 @@ buttonPrediction.addEventListener("click", () => {
 
 var resizeButton = document.querySelector("#resize-canvas");
 resizeButton.addEventListener("click", () => {
-  resizeCanvas(pixelSize == 8 ? 2 : 0.5);
+  resizeCanvas(pixelSize == 8 ? 1.25 : 0.8);
   drawGrid();
   resizeButton.classList.toggle("active");
 });
