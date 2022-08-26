@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Lato:wght@300;400;700&family=Mulish:wght@300;400;500;600&family=Noto+Sans:wght@300;400;500;600&family=Nova+Slim&family=Open+Sans:wght@300;400;500;600&family=Oxanium:wght@400;500;600;700;800&family=Saira:wght@400;500;600;700&display=swap');
+
+:root {
+  --main-green: #47cf73;
+  --title-color: #ffffffdd;
+  --paragraph-color: #c7c9d3;
+  --paragraph-color-gray: #ffffffaa;
+
+  --card-gray: #2c303a;
+  --button-gray: #444857;
+
+  --section-gray: #1e1f2680;
+  --dark-gray: #1d1e22;
+  --bg-color: #131417;
+  --black: #000;
+
+  --yellow-chip: #ffdd40;
+  --link-blue: #76daff;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

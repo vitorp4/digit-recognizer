@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aplicação de Reconhecimento de Dígitos Manuscritos">
+  <meta name="author" content="João Gomes">
+  <link rel="icon" href="{{ url_for('static', path='/assets/favicon-32x32.png') }}" type="image/png">
+
+  {% block css %}{% endblock %}
+  <link rel="stylesheet" href="{{ url_for('static', path='/styles/main.css') }}">
+
+  {% block js %}{% endblock %}
+  <script src="https://kit.fontawesome.com/2240dcfd9d.js" crossorigin="anonymous"></script>
+  
+  <title>Reconhecimento de Dígitos</title>
+</head>
+<body>
+  {% block content %}{% endblock %}
+</body>
+</html>

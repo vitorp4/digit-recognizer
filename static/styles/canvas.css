@@ -1,0 +1,85 @@
+
+.wrapper {
+  margin: auto;
+  width: fit-content;
+  position: relative;
+}
+
+#pixeled-canvas {
+  background-color: #000;
+  cursor: crosshair;
+  display: block;
+  border-radius: 2px;
+  border: 1px solid #47cf7388;
+  margin-bottom: 4px;
+}
+
+button {
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 16px;  
+  border-radius: 2px;
+  font-family: 'Lato', sans-serif;
+  border: none;
+}
+
+#clear {
+  background-color: initial;
+  color: var(--main-green);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#prediction {
+  margin-left: 4px;
+  background-color: var(--main-green);
+}
+
+h1 {
+  color: var(--title-color);
+  font-family: 'Oxanium', cursive;
+  text-align: center;
+  font-size: 32px;
+  margin-top: 16px;
+  font-weight: 700;
+}
+
+p {
+  color: var(--paragraph-color-gray);
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+  margin-bottom: 32px;
+  font-size: 16px;
+}
+
+#resize-canvas {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  color: var(--main-green);
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+#resize-canvas:hover {
+  background-color: var(--button-gray);
+  color: var(--title-color);
+}
+
+#resize-canvas #minimize {
+  display: none;
+}
+
+#resize-canvas.active #minimize {
+  display: inline;
+}
+
+#resize-canvas.active #expand {
+  display: none;
+}
