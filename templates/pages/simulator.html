@@ -1,27 +1,30 @@
-{% extends 'layouts/layout.html' %}
+{% extends 'layouts/layout.html' %} 
 
-{% block css %}
-<link rel="stylesheet" href="{{ url_for('static', path='styles/canvas.css') }}">
-{% endblock %}
-
-{% block js %}
-<script src="{{ url_for('static', path='scripts/canvas3.js')}}" defer></script>
-{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', path='styles/canvas.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', path='styles/counter.css') }}"/>
+<script src="{{ url_for('static', path='scripts/canvas.js')}}" defer></script>
+<script src="{{ url_for('static', path='scripts/counter.js')}}" defer></script>
+<script src="{{ url_for('static', path='scripts/recognition.js')}}" defer></script>
+{% endblock %} 
 
 {% block content %}
-<h1>Reconhecimento de Dígitos Manuscritos</h1>
-<p>Utilize o canvas abaixo para desenhar um dígito à próprio punho.</p>
-<div class="wrapper">
-  <div id="resize-canvas">
-    <span id="expand">
-      <i class="fa-solid fa-expand"></i>
-    </span>
-    <span id="minimize">
-      <i class="fa-solid fa-compress"></i>
-    </span>
+<div class="draw-wrapper">
+  <div class="canvas-wrapper">
+    <div id="canvas-resizer">
+      <span id="expand">
+        <i class="fa-solid fa-expand"></i>
+      </span>
+      <span id="minimize">
+        <i class="fa-solid fa-compress"></i>
+      </span>
+    </div>
+    <canvas id="pixeled-canvas"></canvas>
   </div>
-  <canvas id="pixeled-canvas"></canvas>
-  <button type="button" id="clear"><i class="fa-regular fa-trash-can"></i>Limpar</button>
-  <button type="button" id="prediction">Prever!</button>
-<div>
+  <div class="draw-buttons">
+    <button type="button" id="clear">Limpar</button>
+    <button type="button" id="prediction">Reconhecer</button>
+  </div>
+</div>
 {% endblock %}
+

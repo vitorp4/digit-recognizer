@@ -1,29 +1,33 @@
-var canvas = document.querySelector("#pixeled-canvas");
-var ctx = canvas.getContext("2d");
-var numberOfPixels = 28;
-var pixelSize = 8;
-var grayScaleMatrix = Array.from(Array(28), (_) => Array(28).fill(0));
-var drawMode = false;
-
+const canvas = document.querySelector("#pixeled-canvas"),
+  buttonClear = document.querySelector("#clear"),
+  resizeButton = document.querySelector("#canvas-resizer"),
+  ctx = canvas.getContext("2d"),
+  numberOfPixels = 28;
+  
+let grayScaleMatrix = Array.from(Array(28), (_) => Array(28).fill(0)),
+  drawMode = false,
+  pixelSize = 8;
+  
 window.addEventListener('load', resizeCanvas(1));
 window.addEventListener('load', drawGrid());
+resizeButton.addEventListener("click", resizeCanvas);
+buttonClear.addEventListener("click", clearCanvas);
 
 canvas.addEventListener("pointerdown", () => (drawMode = true));
 canvas.addEventListener("pointerup", () => (drawMode = false));
 canvas.addEventListener("pointerout", () => (drawMode = false));
+canvas.addEventListener("pointermove", (ev) => drawMode && dispatchPixelize(ev));
 
-canvas.addEventListener("pointermove", (ev) => {
-  if (drawMode) {
-    var x = Math.floor(ev.offsetX / pixelSize);
-    var y = Math.floor(ev.offsetY / pixelSize);
+function dispatchPixelize(ev) {
+  const x = Math.floor(ev.offsetX / pixelSize);
+  const y = Math.floor(ev.offsetY / pixelSize);
 
-    pixelize(x, y);
-    pixelize(x - 1, y);
-    pixelize(x + 1, y);
-    pixelize(x, y - 1);
-    pixelize(x, y + 1);
-  }
-});
+  pixelize(x, y);
+  pixelize(x - 1, y);
+  pixelize(x + 1, y);
+  pixelize(x, y - 1);
+  pixelize(x, y + 1);
+}
 
 function pixelize(x, y) {
   if (!(x >= 0 && x < 28 && y >= 0 && y < 28) || grayScaleMatrix[y][x] == 255) {
@@ -45,8 +49,8 @@ function drawRect(
   fillOptions = { display: true, grayLevel: 0 },
   strokeOptions = { display: false, grayLevel: 32 }
 ) {
-  ctx.strokeStyle = `rgb(${Array(3).fill(strokeOptions.grayLevel).join(",")})`;
-  ctx.fillStyle = `rgb(${Array(3).fill(fillOptions.grayLevel).join(",")})`;
+  ctx.strokeStyle = '#' + strokeOptions.grayLevel.toString(16).repeat(3);
+  ctx.fillStyle = '#' + fillOptions.grayLevel.toString(16).repeat(3);
 
   if (strokeOptions.display) {
     ctx.strokeRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
@@ -57,30 +61,21 @@ function drawRect(
   }
 }
 
-var buttonClear = document.querySelector("#clear");
-buttonClear.addEventListener("click", () => {
+function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawGrid({ resetMatrix: true, displayStroke: true });
-});
+}
 
-var buttonPrediction = document.querySelector("#prediction");
-buttonPrediction.addEventListener("click", () => {
-  console.log(grayScaleMatrix);
-});
-
-var resizeButton = document.querySelector("#resize-canvas");
-resizeButton.addEventListener("click", () => {
-  resizeCanvas(pixelSize == 8 ? 1.25 : 0.8);
-  drawGrid();
-  resizeButton.classList.toggle("active");
-});
-
-function resizeCanvas(factor) {
+function resizeCanvas() {
+  let factor = pixelSize == 8 ? 1.25 : 0.8;
   pixelSize = factor * pixelSize;
-  canvasSize = numberOfPixels * pixelSize;
-  console.log("canvasSize", canvasSize);
+  let canvasSize = numberOfPixels * pixelSize;
+
   canvas.setAttribute("height", canvasSize);
   canvas.setAttribute("width", canvasSize);
+
+  resizeButton.classList.toggle("active");
+  drawGrid();
 }
 
 function drawGrid(options = { resetMatrix: false, displayStroke: true }) {

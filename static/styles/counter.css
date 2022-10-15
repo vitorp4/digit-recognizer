@@ -1,0 +1,27 @@
+.increment-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 50px;
+  overflow: hidden;
+  border: 3px solid var(--main-green);
+  border-radius: 3px;
+}
+
+.numbers-slider {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--section-gray);
+  cursor: pointer;
+}
+
+.numbers-slider > div {
+  font-weight: 500;
+  font-family: Helvetica;
+  color: white;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

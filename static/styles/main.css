@@ -1,15 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Lato:wght@300;400;700&family=Mulish:wght@300;400;500;600&family=Noto+Sans:wght@300;400;500;600&family=Nova+Slim&family=Open+Sans:wght@300;400;500;600&family=Oxanium:wght@400;500;600;700;800&family=Saira:wght@400;500;600;700&display=swap');
-
 :root {
-  --main-green: #47cf73;
   --title-color: #ffffffdd;
   --paragraph-color: #c7c9d3;
   --paragraph-color-gray: #ffffffaa;
 
-  --card-gray: #2c303a;
-  --button-gray: #444857;
+  --primary-button-bg: #47CF73;
+  --primary-button-shadow: #106029;
+  --secondary-button-bg: #444857;
+  --secondary-button-shadow: #30323C;
 
-  --section-gray: #1e1f2680;
+  --card-gray: #2c303a;
+  --section-gray: #1e1f26;
   --dark-gray: #1d1e22;
   --bg-color: #131417;
   --black: #000;
@@ -29,4 +29,31 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+button {
+  padding: 11px 22px;
+  cursor: pointer;
+  font-size: 18px;  
+  font-weight: 400;
+  border-radius: 3px;
+  font-family: 'Oxanium', sans-serif;
+  border: none;
+}
+
+button#clear {
+  background-color: var(--secondary-button-bg);
+  box-shadow: 0 4px 0 0 var(--secondary-button-shadow);
+  color: white;
+}
+
+button#prediction {
+  font-weight: 500;
+  background-color: var(--primary-button-bg);
+  box-shadow: 0 4px 0 0 var(--primary-button-shadow);
+}
+
+button#clear:active, button#prediction:active {
+  box-shadow: none;
+  transform: translateY(2px);
 }
