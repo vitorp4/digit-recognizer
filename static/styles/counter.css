@@ -1,26 +1,73 @@
-.increment-wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100px;
-  height: 50px;
-  overflow: hidden;
-  border: 3px solid var(--main-green);
+.draw-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+.counter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: fit-content;
+  gap: 12px;
+}
+
+
+.counter-model {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.counter-name {
+  font-family: Oxanium, cursive;
+  color: rgba(255,255,255,0.9);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.counter-wrapper {
+  display: flex;
   border-radius: 3px;
+  overflow: hidden;
+}
+
+.counter-labels {
+  display: flex;
+}
+
+.counter-label {
+  text-align: center;
+  font-weight: 500;
+  width: 43px;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 13px;
+  font-family: Oxanium, cursive;
+}
+
+.increment-wrapper {
+  width: 43px;
+  height: 41px;
+}
+
+.increment-wrapper + .increment-wrapper {
+  border-left: 1px solid var(--section-gray);
 }
 
 .numbers-slider {
   display: flex;
   flex-direction: column;
-  background-color: var(--section-gray);
+  background-color: var(--simulator-black);
   cursor: pointer;
 }
 
 .numbers-slider > div {
   font-weight: 500;
-  font-family: Helvetica;
-  color: white;
-  height: 50px;
+  font-family: Oxanium, cursive;
+  font-size: 18px;
+  color: rgba(255,255,255,0.3);
+  height: 41px;
   display: flex;
   align-items: center;
   justify-content: center;

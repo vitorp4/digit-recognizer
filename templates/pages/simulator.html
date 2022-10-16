@@ -1,29 +1,43 @@
 {% extends 'layouts/layout.html' %} 
+{% import 'macros/counter.html' as counter %}
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', path='styles/canvas.css') }}"/>
 <link rel="stylesheet" href="{{ url_for('static', path='styles/counter.css') }}"/>
 <script src="{{ url_for('static', path='scripts/canvas.js')}}" defer></script>
-<script src="{{ url_for('static', path='scripts/counter.js')}}" defer></script>
 <script src="{{ url_for('static', path='scripts/recognition.js')}}" defer></script>
 {% endblock %} 
 
 {% block content %}
-<div class="draw-wrapper">
-  <div class="canvas-wrapper">
-    <div id="canvas-resizer">
-      <span id="expand">
-        <i class="fa-solid fa-expand"></i>
-      </span>
-      <span id="minimize">
-        <i class="fa-solid fa-compress"></i>
-      </span>
+<div class="container">
+  <div class="draw-counter">
+    <div class="draw-wrapper">
+      <div class="canvas-wrapper">
+        <div id="canvas-resizer">
+          <span id="expand">
+            <i class="fa-solid fa-expand"></i>
+          </span>
+          <span id="minimize">
+            <i class="fa-solid fa-compress"></i>
+          </span>
+        </div>
+        <canvas id="pixeled-canvas"></canvas>
+      </div>
+      <div class="draw-buttons">
+        <button type="button" id="clear">Limpar</button>
+        <button type="button" id="prediction">Reconhecer</button>
+      </div>
     </div>
-    <canvas id="pixeled-canvas"></canvas>
-  </div>
-  <div class="draw-buttons">
-    <button type="button" id="clear">Limpar</button>
-    <button type="button" id="prediction">Reconhecer</button>
+
+    <div class="counter">
+      <div class="counter-labels">
+        {% for i in range(10) %}
+        <div class="counter-label">{{ loop.index0 }}</div>
+        {% endfor %}
+      </div>
+      {{ counter.modelCounter('MLP') }}
+      {{ counter.modelCounter('ConvNet') }}
+    </div>
   </div>
 </div>
 {% endblock %}

@@ -24,7 +24,7 @@ async def simulator_app(request: Request):
   return templates.TemplateResponse("pages/simulator.html", {"request": request}) 
 
 @app.post("/predict", response_model=List[NeuralNetworkPrediction])
-async def classifier_mlp(matrix = Body()):
+async def classifier(matrix = Body()):
   mlp = load_model("neural_networks/mlp_model")
   convnet = load_model("neural_networks/convnet_model")
   digit = np.array(matrix).flatten()

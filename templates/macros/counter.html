@@ -1,7 +1,20 @@
-{% macro increment(index)%}
+{% macro increment() %}
 <div class='increment-wrapper'>
   <div class='numbers-slider'>
     <div>0</div>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro modelCounter(modelName) %}
+<div class="counter-model">
+  <div class="counter-name">
+    {{ modelName }}
+  </div>
+  <div id="{{ modelName | lower }}-counter" class="counter-wrapper">
+    {% for i in range(10) %}
+      {{ increment() }}
+    {% endfor %}
   </div>
 </div>
 {% endmacro %}
