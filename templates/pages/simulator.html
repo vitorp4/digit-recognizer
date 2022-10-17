@@ -1,15 +1,17 @@
 {% extends 'layouts/layout.html' %} 
 {% import 'macros/counter.html' as counter %}
+{% import 'macros/probability.html' as probability %}
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', path='styles/canvas.css') }}"/>
 <link rel="stylesheet" href="{{ url_for('static', path='styles/counter.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', path='styles/probability.css') }}"/>
 <script src="{{ url_for('static', path='scripts/canvas.js')}}" defer></script>
 <script src="{{ url_for('static', path='scripts/recognition.js')}}" defer></script>
 {% endblock %} 
 
 {% block content %}
-<div class="container">
+<div class="simulator-container">
   <div class="draw-counter">
     <div class="draw-wrapper">
       <div class="canvas-wrapper">
@@ -24,20 +26,25 @@
         <canvas id="pixeled-canvas"></canvas>
       </div>
       <div class="draw-buttons">
-        <button type="button" id="clear">Limpar</button>
-        <button type="button" id="prediction">Reconhecer</button>
+        <button type="button" id="clear" class="button-secondary">Limpar</button>
+        <button type="button" id="prediction" class="button-primary">Reconhecer</button>
       </div>
     </div>
 
     <div class="counter">
-      <div class="counter-labels">
-        {% for i in range(10) %}
-        <div class="counter-label">{{ loop.index0 }}</div>
-        {% endfor %}
+      <div class="counter-button-wrapper">      
+        {{ counter.labels() }}
+        {{ counter.modelCounter('MLP') }}
+        <!-- {{ counter.labels() }} -->
+        {{ counter.modelCounter('ConvNet') }}
       </div>
-      {{ counter.modelCounter('MLP') }}
-      {{ counter.modelCounter('ConvNet') }}
+      <button type="button" class="button-secondary">Zerar</button>
     </div>
+  </div>
+
+  <div class="probabilities">
+    {{ probability.probability('MLP') }}
+    {{ probability.probability('ConvNet') }}
   </div>
 </div>
 {% endblock %}

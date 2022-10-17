@@ -1,8 +1,8 @@
-{% macro increment() %}
-<div class='increment-wrapper'>
-  <div class='numbers-slider'>
-    <div>0</div>
-  </div>
+{% macro labels() %}
+<div class="counter-labels">
+  {% for i in range(10) %}
+  <div class="counter-label">{{ loop.index0 }}</div>
+  {% endfor %}
 </div>
 {% endmacro %}
 
@@ -13,7 +13,11 @@
   </div>
   <div id="{{ modelName | lower }}-counter" class="counter-wrapper">
     {% for i in range(10) %}
-      {{ increment() }}
+    <div class='increment-wrapper'>
+      <div class='numbers-slider'>
+        <div>0</div>
+      </div>
+    </div>
     {% endfor %}
   </div>
 </div>

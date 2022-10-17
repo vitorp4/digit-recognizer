@@ -1,18 +1,52 @@
+.simulator-container {
+  display: flex;
+  width: 1200px;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  height: 100vh;
+}
+
 .draw-counter {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 48px;
+  justify-content: space-between;
+  height: 100%;
+  padding: 48px 0;
+  /* gap: 48px; */
 }
 
 .counter {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  border-top: 2px solid var(--section-gray);
   width: fit-content;
-  gap: 12px;
+  padding: 24px 16px 16px 16px;
+  position: relative;
+  align-items: center;
+  gap: 16px;
 }
 
+.counter::before {
+  content: 'CONTADOR';
+  position: absolute;
+  background-color: var(--bg-color);
+  padding: 0 16px;
+  left: 50%;
+  font-size: 12px;
+  font-family: Oxanium, cursive;
+  color: rgba(255, 255, 255, 0.3);
+  line-height: 16px;
+  top: -8px;
+  transform: translateX(-50%);
+}
+
+.counter-button-wrapper {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 12px;
+}
 
 .counter-model {
   display: flex;
@@ -51,7 +85,7 @@
   height: 41px;
 }
 
-.increment-wrapper + .increment-wrapper {
+.increment-wrapper:not(:first-child) {
   border-left: 1px solid var(--section-gray);
 }
 

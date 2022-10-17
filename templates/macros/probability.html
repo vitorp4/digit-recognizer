@@ -1,0 +1,13 @@
+{% macro probability(modelName) %}
+<div id="{{ modelName | lower }}-probabilities" class="probability-model">
+  <div class="probability-name">{{ modelName }}</div>
+  <div class="probabilities-wrapper">
+    {% for i in range(10) %}
+    <div class="probability-wrapper">
+      <div class="probability-result">???</div>
+      <div class="probability-digit">{{ loop.index0 }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endmacro %}

@@ -13,6 +13,7 @@
   --section-gray: #1e1f26;
   --dark-gray: #1d1e22;
   --bg-color: #131417;
+  --skeleton-secondary: #38383F;
   --black: #000;
 
   --yellow-chip: #ffdd40;
@@ -42,19 +43,19 @@ button {
   border: none;
 }
 
-button#clear {
+.button-secondary {
   background-color: var(--secondary-button-bg);
   box-shadow: 0 4px 0 0 var(--secondary-button-shadow);
   color: white;
 }
 
-button#prediction {
+.button-primary {
   font-weight: 500;
   background-color: var(--primary-button-bg);
   box-shadow: 0 4px 0 0 var(--primary-button-shadow);
 }
 
-button#clear:active, button#prediction:active {
+:where(.button-secondary, .button-primary):active {
   box-shadow: none;
   transform: translateY(2px);
 }

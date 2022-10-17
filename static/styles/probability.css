@@ -1,0 +1,106 @@
+@property --angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.probabilities {
+  display: flex;
+  gap: 80px;
+}
+
+.probability-name {
+  font-family: Oxanium, cursive;
+  color: rgba(255,255,255,0.9);
+  font-weight: 700;
+  font-size: 22px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.probabilities-wrapper {
+  background-color: var( --simulator-black);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.probability-wrapper {
+  padding: 6px 16px;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: Oxanium, cursive;
+}
+
+.probability-wrapper:not(:first-child) {
+  border-top: 1px solid var(--section-gray);
+}
+
+.probability-result {
+  font-size: 17px;
+  font-weight: 500;
+  width: 86px;
+  text-align: center;
+  color: inherit;
+}
+
+@keyframes angle-frames {
+  to {
+    --angle: 180deg;
+  }
+}
+
+.probability-wrapper.highlight {
+  z-index: 2;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.probability-wrapper.highlight::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(var(--primary-button-bg) 0deg var(--angle), transparent var(--angle) 180deg, var(--primary-button-bg) 180deg calc(180deg + var(--angle)), transparent calc(180deg + var(--angle)) 360deg);
+  width: calc(100% + 100px);
+  height: calc(100% + 100px);
+  z-index: -2;
+  animation: angle-frames 2s cubic-bezier(.43,.45,0,.99) forwards;
+}
+
+.probability-wrapper.highlight::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background-color: var(--simulator-black);
+  border-radius: 3px;
+  z-index: -1;
+}
+
+.probability-digit {
+  font-size: 36px;
+  font-weight: 500;
+  color: inherit;
+}
+
+.probability-result:empty {
+  height: 21px;
+  background-size: 500px;
+  background-image: linear-gradient(80deg, var(--simulator-black) 65%, var(--skeleton-secondary) 70% 70%, var(--simulator-black) 75%);
+  background-repeat: no-repeat;
+  background-position-x: -414px;
+  animation: skeleton 2s infinite;
+}
+
+@keyframes skeleton {
+  to {
+    background-position-x: 0px;
+  }
+}
+
+
+
