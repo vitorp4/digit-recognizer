@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 import numpy as np
 from fastapi import Body
 from pydantic import BaseModel
@@ -17,7 +17,7 @@ app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-templates = Jinja2Templates(directory="templates") 
+templates = Jinja2Templates(directory="templates")
  
 @app.get("/", response_class=HTMLResponse) 
 async def simulator_app(request: Request):
