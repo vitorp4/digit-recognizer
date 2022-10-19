@@ -47,3 +47,5 @@ async def classifier(matrix = Body()):
   }]
 
   return response
+
+  # Jinja2, fastapi, uvicorn[standard], tensorflow, requests
