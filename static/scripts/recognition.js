@@ -1,4 +1,5 @@
 const buttonPrediction = document.querySelector("#prediction");
+const buttonReset = document.querySelector("#reset");
 const numbersMlp = document.querySelectorAll("#mlp-counter .numbers-slider");
 const numbersConvnet = document.querySelectorAll(
   "#convnet-counter .numbers-slider"
@@ -11,11 +12,9 @@ const probabilitiesConvnet = document.querySelectorAll(
 );
 
 buttonPrediction.addEventListener("click", predict);
+buttonReset.addEventListener("click", resetCounters);
 [...numbersMlp, ...numbersConvnet].forEach((el) =>
   el.addEventListener("increment", incrementCounter)
-);
-[...probabilitiesMlp, ...probabilitiesConvnet].forEach((el) =>
-  el.addEventListener("highlight", highlightProbability)
 );
 
 function predict() {
@@ -29,29 +28,30 @@ function predict() {
 
   fetch("/predict", options)
     .then((response) => response.json())
-    .then((data) => {
-      let mlpResult = data.find((el) => el.model === "mlp");
-      updateProbabilities(probabilitiesMlp, mlpResult.probabilities);
-      let mlpDigitResult = mlpResult.digit;
-      
-      probabilitiesMlp[mlpDigitResult].dispatchEvent(new Event("highlight"));
+    .then((data) => updateApplication(data));
+}
 
-      setTimeout(
-        () => numbersMlp[mlpDigitResult].dispatchEvent(new Event("increment")),
-        1000
-      );
+function updateApplication(data) {
+  let mlpResult = data.find((el) => el.model === "mlp");
+  updateProbabilities(probabilitiesMlp, mlpResult.probabilities);
+  let mlpDigitResult = mlpResult.digit;
+  addHighlight(probabilitiesMlp[mlpDigitResult]);
 
-      let convnetResult = data.find((el) => el.model === "convnet");
-      updateProbabilities(probabilitiesConvnet, convnetResult.probabilities);
-      let convnetDigitResult = convnetResult.digit;
-      probabilitiesConvnet[convnetDigitResult].dispatchEvent(new Event("highlight"));
+  setTimeout(
+    () => numbersMlp[mlpDigitResult].dispatchEvent(new Event("increment")),
+    1000
+  );
 
-      setTimeout(
-        () =>
-          numbersConvnet[convnetDigitResult].dispatchEvent(new Event("increment")),
-        1000
-      );
-    });
+  let convnetResult = data.find((el) => el.model === "convnet");
+  updateProbabilities(probabilitiesConvnet, convnetResult.probabilities);
+  let convnetDigitResult = convnetResult.digit;
+  addHighlight(probabilitiesConvnet[convnetDigitResult]);
+
+  setTimeout(
+    () =>
+      numbersConvnet[convnetDigitResult].dispatchEvent(new Event("increment")),
+    1000
+  );
 }
 
 function incrementCounter() {
@@ -78,10 +78,6 @@ function incrementCounter() {
   }, animDuration);
 }
 
-function highlightProbability(ev) {
-  setTimeout(() => ev.target.classList.add("highlight"), 10);
-}
-
 function updateProbabilities(elements, probabilities) {
   elements.forEach((el, i) => {
     let expNotation = probabilities[i].toExponential(2);
@@ -95,7 +91,40 @@ function updateProbabilities(elements, probabilities) {
 
 function eraseProbabilities(elements) {
   elements.forEach((el) => {
-    el.classList.remove("highlight");
+    removeHighlight(el);
     el.querySelector(".probability-result").innerHTML = "";
   });
+}
+
+function addHighlight(el) {
+  el.classList.add("highlight");
+}
+
+function removeHighlight(el) {
+  el.classList.remove("highlight");
+}
+
+function resetCounters() {
+  [...numbersMlp, ...numbersConvnet].forEach(el => {
+    let firstChild = el.querySelector("div:last-child");
+  
+    newDiv = document.createElement("div");
+    newDiv.innerHTML = 0;
+    newDiv.style.color = "rgba(255,255,255,0.3)";
+    el.append(newDiv);
+    const animDuration = 500;
+  
+    const sliding = [{ transform: "translateY(-50px)" }];
+  
+    const slidingOptions = {
+      duration: animDuration,
+      iterations: 1,
+    };
+  
+    el.animate(sliding, slidingOptions);
+  
+    setTimeout(() => {
+      firstChild.remove();
+    }, animDuration);
+  })
 }
