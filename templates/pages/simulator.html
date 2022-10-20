@@ -16,19 +16,19 @@
   <div class="draw-counter">
     <div class="draw-wrapper">
       <div class="canvas-wrapper">
-        <div id="canvas-resizer">
+        <button id="resize">
           <span id="expand">
             <i class="fa-solid fa-expand"></i>
           </span>
           <span id="minimize">
             <i class="fa-solid fa-compress"></i>
           </span>
-        </div>
+        </button>
         <canvas id="pixeled-canvas"></canvas>
       </div>
       <div class="draw-buttons">
-        <button type="button" id="clear" class="button-secondary">Limpar</button>
-        <button type="button" id="prediction" class="button-primary">Reconhecer</button>
+        <button type="button" id="clear" class="button-3d secondary">Limpar</button>
+        <button type="button" id="prediction" class="button-3d primary">Reconhecer</button>
       </div>
     </div>
 
@@ -39,7 +39,7 @@
         <!-- {{ counter.labels() }} -->
         {{ counter.modelCounter('ConvNet') }}
       </div>
-      <button type="button" id="reset" class="button-secondary">Zerar</button>
+      <button type="button" id="reset" class="button-3d secondary">Zerar</button>
     </div>
   </div>
 

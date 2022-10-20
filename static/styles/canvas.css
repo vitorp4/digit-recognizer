@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  margin-top: 48px;
+  margin-top: 64px;
 }
 
 .canvas-wrapper {
@@ -19,39 +19,39 @@
   background-color: #000;
   cursor: crosshair;
   display: block;
-  border-radius: 2px;
-  border: 1px solid #47cf7388;
+  border-radius: 6px;
   margin-bottom: 4px;
   touch-action: none;
 }
 
-#canvas-resizer {
+#resize {
   position: absolute;
   right: 8px;
   top: 8px;
   color: var(--primary-button-bg);
+  background-color: transparent;
   width: 24px;
   height: 24px;
   display: grid;
   place-items: center;
-  cursor: pointer;
   border-radius: 4px;
   transition: 0.3s;
+  font-size: 16px;
 }
 
-#canvas-resizer:hover {
+#resize:hover {
   background-color: var(--secondary-button-bg);
   color: var(--title-color);
 }
 
-#canvas-resizer #minimize {
+#resize #minimize {
   display: none;
 }
 
-#canvas-resizer.active #minimize {
+#resize.active #minimize {
   display: inline;
 }
 
-#canvas-resizer.active #expand {
+#resize.active #expand {
   display: none;
 }

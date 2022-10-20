@@ -21,14 +21,20 @@ function predict() {
   options = {
     method: "POST",
     headers: new Headers({ "Content-Type": "application/json" }),
-    body: JSON.stringify(grayScaleMatrix),
+    body: JSON.stringify(grayMatrix),
   };
 
   eraseProbabilities([...probabilitiesMlp, ...probabilitiesConvnet]);
+  buttonPrediction.disabled = true;
 
   fetch("/predict", options)
     .then((response) => response.json())
-    .then((data) => updateApplication(data));
+    .then((data) =>
+      setTimeout(() => {
+        updateApplication(data);
+        buttonPrediction.disabled = false;
+      }, 900)
+    );
 }
 
 function updateApplication(data) {
@@ -55,27 +61,26 @@ function updateApplication(data) {
 }
 
 function incrementCounter() {
-  let firstChild = this.querySelector("div:last-child");
-  let c = +firstChild.innerHTML;
+  let lastChild = this.querySelector("div:last-child");
+  let newValue = parseInt(lastChild.innerHTML) + 1;
 
   newDiv = document.createElement("div");
-  newDiv.innerHTML = c + 1;
+  newDiv.innerHTML = newValue;
   newDiv.style.color = "rgba(255,255,255,0.9)";
   this.append(newDiv);
-  const animDuration = 500;
 
-  const sliding = [{ transform: "translateY(-50px)" }];
+  const sliding = [
+    { transform: `translateY(-${(this.children.length - 1) * 41}px)` },
+  ];
 
   const slidingOptions = {
-    duration: animDuration,
+    duration: 500,
     iterations: 1,
+    fill: "forwards",
   };
 
-  this.animate(sliding, slidingOptions);
-
-  setTimeout(() => {
-    firstChild.remove();
-  }, animDuration);
+  let anim = this.animate(sliding, slidingOptions);
+  anim.commitStyles();
 }
 
 function updateProbabilities(elements, probabilities) {
@@ -83,9 +88,18 @@ function updateProbabilities(elements, probabilities) {
     let expNotation = probabilities[i].toExponential(2);
     let decimal = parseFloat(expNotation.slice(0, 4));
     let exponent = parseInt(expNotation.slice(5));
+
+    if (exponent === 0) {
+      decimal = 9.99;
+      exponent = -1;
+    }
+
     el.querySelector(
       ".probability-result"
     ).innerHTML = `${decimal}x10<sup>${exponent}</sup>`;
+
+    let alpha = 0.9 + (exponent + 1) * 0.08;
+    el.style.color = `rgba(255,255,255,${alpha < 0.3 ? 0.3 : alpha}`;
   });
 }
 
@@ -105,26 +119,24 @@ function removeHighlight(el) {
 }
 
 function resetCounters() {
-  [...numbersMlp, ...numbersConvnet].forEach(el => {
-    let firstChild = el.querySelector("div:last-child");
-  
+  [...numbersMlp, ...numbersConvnet].forEach((el) => {
     newDiv = document.createElement("div");
     newDiv.innerHTML = 0;
     newDiv.style.color = "rgba(255,255,255,0.3)";
     el.append(newDiv);
     const animDuration = 500;
-  
-    const sliding = [{ transform: "translateY(-50px)" }];
-  
+
+    const sliding = [
+      { transform: `translateY(-${(el.children.length - 1) * 41}px)` },
+    ];
+
     const slidingOptions = {
       duration: animDuration,
       iterations: 1,
+      fill: "forwards",
     };
-  
-    el.animate(sliding, slidingOptions);
-  
-    setTimeout(() => {
-      firstChild.remove();
-    }, animDuration);
-  })
+
+    let anim = el.animate(sliding, slidingOptions);
+    anim.commitStyles();
+  });
 }

@@ -34,28 +34,36 @@ body {
 }
 
 button {
-  padding: 11px 22px;
+  border: none;
   cursor: pointer;
+  color: inherit;
+}
+
+.button-3d {
+  padding: 11px 22px;
   font-size: 18px;  
   font-weight: 400;
   border-radius: 3px;
   font-family: 'Oxanium', sans-serif;
-  border: none;
 }
 
-.button-secondary {
+.button-3d.secondary {
   background-color: var(--secondary-button-bg);
   box-shadow: 0 4px 0 0 var(--secondary-button-shadow);
   color: white;
 }
 
-.button-primary {
+.button-3d.primary {
   font-weight: 500;
   background-color: var(--primary-button-bg);
   box-shadow: 0 4px 0 0 var(--primary-button-shadow);
 }
 
-:where(.button-secondary, .button-primary):active {
+.button-3d:active:enabled {
   box-shadow: none;
   transform: translateY(2px);
+}
+
+.button-3d.primary:disabled {
+  cursor: progress;
 }

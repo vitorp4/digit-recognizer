@@ -39,6 +39,8 @@
   line-height: 16px;
   top: -8px;
   transform: translateX(-50%);
+  font-weight: 500;
+  letter-spacing: 1px;
 }
 
 .counter-button-wrapper {
