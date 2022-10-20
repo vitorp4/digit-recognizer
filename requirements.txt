@@ -46,7 +46,7 @@ tensorboard-plugin-wit==1.8.1
 tensorflow-cpu==2.10.0
 tensorflow-estimator==2.10.0
 tensorflow-io-gcs-filesystem==0.27.0
-tensorflow_intel==2.10.0
+tensorflow_intel
 termcolor==2.0.1
 typing_extensions==4.4.0
 urllib3==1.26.12
