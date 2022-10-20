@@ -13,6 +13,9 @@ class NeuralNetworkPrediction(BaseModel):
   probabilities: List[float]
   digit: float
 
+mlp_model = load_model('neural_networks/mlp_model')
+convnet_model = load_model('neural_networks/convnet_model')
+
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -29,9 +32,6 @@ async def classifier(matrix = Body()):
 
   digit_mlp = digit.reshape((1, 28*28)).astype('float32') / 255
   digit_convnet = digit.reshape((1, 28, 28, 1)).astype('float32') / 255
-
-  mlp_model = load_model('neural_networks/mlp_model')
-  convnet_model = load_model('neural_networks/convnet_model')
 
   probabilities_mlp = mlp_model.predict(digit_mlp)
   probabilities_convnet = convnet_model.predict(digit_convnet)
