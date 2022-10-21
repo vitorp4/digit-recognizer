@@ -1,16 +1,15 @@
-{% macro labels() %}
-<div class="counter-labels">
-  {% for i in range(10) %}
-  <div class="counter-label">{{ loop.index0 }}</div>
-  {% endfor %}
-</div>
-{% endmacro %}
-
 {% macro modelCounter(modelName) %}
 <div class="counter-model">
   <div class="counter-name">
     {{ modelName }}
   </div>
+
+  <div class="counter-labels">
+    {% for i in range(10) %}
+    <div class="counter-label">{{ loop.index0 }}</div>
+    {% endfor %}
+  </div>
+
   <div id="{{ modelName | lower }}-counter" class="counter-wrapper">
     {% for i in range(10) %}
     <div class='increment-wrapper'>

@@ -8,23 +8,25 @@ from pydantic import BaseModel
 from keras.models import load_model
 from typing import List
 
+
 class NeuralNetworkPrediction(BaseModel):
   model: str
   probabilities: List[float]
   digit: float
 
+
 mlp_model = load_model('neural_networks/mlp_model')
 convnet_model = load_model('neural_networks/convnet_model')
 
 app = FastAPI()
-
 app.mount("/static", StaticFiles(directory="static"), name="static")
-
 templates = Jinja2Templates(directory="templates")
  
+
 @app.get("/", response_class=HTMLResponse) 
 async def simulator_app(request: Request):
   return templates.TemplateResponse("pages/simulator.html", {"request": request}) 
+
 
 @app.post("/predict", response_model=List[NeuralNetworkPrediction])
 async def classifier(matrix = Body()):

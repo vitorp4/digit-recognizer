@@ -29,12 +29,10 @@ function predict() {
 
   fetch("/predict", options)
     .then((response) => response.json())
-    .then((data) =>
-      setTimeout(() => {
-        updateApplication(data);
-        buttonPrediction.disabled = false;
-      }, 900)
-    );
+    .then((data) => setTimeout(() => {
+      updateApplication(data);
+      buttonPrediction.disabled = false;
+    }, 900));
 }
 
 function updateApplication(data) {
@@ -70,7 +68,7 @@ function incrementCounter() {
   this.append(newDiv);
 
   const sliding = [
-    { transform: `translateY(-${(this.children.length - 1) * 41}px)` },
+    { transform: `translateY(-${(this.children.length - 1) * (+lastChild.offsetHeight)}px)` },
   ];
 
   const slidingOptions = {
@@ -120,23 +118,27 @@ function removeHighlight(el) {
 
 function resetCounters() {
   [...numbersMlp, ...numbersConvnet].forEach((el) => {
-    newDiv = document.createElement("div");
-    newDiv.innerHTML = 0;
-    newDiv.style.color = "rgba(255,255,255,0.3)";
-    el.append(newDiv);
-    const animDuration = 500;
+    let lastChild = el.querySelector("div:last-child");
 
-    const sliding = [
-      { transform: `translateY(-${(el.children.length - 1) * 41}px)` },
-    ];
+    if (+lastChild.innerHTML !== 0) {
+      newDiv = document.createElement("div");
+      newDiv.innerHTML = 0;
+      newDiv.style.color = "rgba(255,255,255,0.3)";
+      el.append(newDiv);
+      const animDuration = 500;
 
-    const slidingOptions = {
-      duration: animDuration,
-      iterations: 1,
-      fill: "forwards",
-    };
+      const sliding = [
+        { transform: `translateY(-${(el.children.length - 1) * (+lastChild.offsetHeight)}px)` },
+      ];
 
-    let anim = el.animate(sliding, slidingOptions);
-    anim.commitStyles();
+      const slidingOptions = {
+        duration: animDuration,
+        iterations: 1,
+        fill: "forwards",
+      };
+
+      let anim = el.animate(sliding, slidingOptions);
+      anim.commitStyles();
+    }
   });
 }

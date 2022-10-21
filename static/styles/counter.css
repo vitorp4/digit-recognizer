@@ -1,30 +1,46 @@
 .simulator-container {
-  display: flex;
-  width: 1200px;
-  justify-content: space-between;
-  align-items: center;
-  margin: auto;
-  height: 100vh;
+  display: grid;
+  grid-template-areas: 
+    "canvas"
+    "probability"
+    "counter";
+  width: 100%;
+  justify-items: center;
 }
-
-.draw-counter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  padding: 48px 0;
-  /* gap: 48px; */
+  
+@media screen and (min-width: 500px) {
+  .simulator-container {
+    margin: auto;
+    min-height: 100vh;
+    width: 1200px;
+    grid-template-areas:
+      "canvas probability"
+      "counter probability";
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 96px;
+  }
 }
 
 .counter {
+  grid-area: counter;
   display: flex;
+  flex-direction: column;
   border-top: 2px solid var(--section-gray);
-  width: fit-content;
-  padding: 24px 16px 16px 16px;
+  padding-top: 36px;
   position: relative;
   align-items: center;
+  margin: 80px 0;
   gap: 16px;
+}
+
+@media screen and (min-width: 500px) {
+  .counter {
+    width: fit-content;
+    margin: 0;
+    flex-direction: row;
+    padding: 24px 16px 16px 16px;
+  }
 }
 
 .counter::before {
@@ -33,58 +49,111 @@
   background-color: var(--bg-color);
   padding: 0 16px;
   left: 50%;
-  font-size: 12px;
+  font-size: 11px;
   font-family: Oxanium, cursive;
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--low-white);
   line-height: 16px;
   top: -8px;
   transform: translateX(-50%);
   font-weight: 500;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
-.counter-button-wrapper {
+.counters-wrapper {
   display: flex;
   align-items: flex-end;
   flex-direction: column;
-  gap: 12px;
+  row-gap: 16px;
+}
+
+@media screen and (min-width: 500px) {
+  .counters-wrapper {
+    gap: 12px;
+  }
 }
 
 .counter-model {
-  display: flex;
+  display: grid;
+  grid-template-areas: 
+    "name"
+    "labels"
+    "counters";
   align-items: center;
-  gap: 16px;
+  row-gap: 12px;
+}
+
+
+@media screen and (min-width: 500px) {
+  .counter-model {
+    grid-template-areas:
+      ". labels"
+      "name counters";
+    column-gap: 16px;
+  }
+
+  .counter-model:nth-child(2) {
+    row-gap: 0;
+  }
+
+  .counter-model:nth-child(2) .counter-labels {
+    display: none;
+  }
 }
 
 .counter-name {
+  grid-area: name;
   font-family: Oxanium, cursive;
-  color: rgba(255,255,255,0.9);
-  font-size: 16px;
+  color: var(--high-white);
+  font-size: 14px;
   font-weight: 600;
+  align-self: flex-start;
+}
+
+@media screen and (min-width: 500px) {
+  .counter-name {
+    font-size: 16px;
+    align-self: center;
+  }
 }
 
 .counter-wrapper {
+  grid-area: counters;
   display: flex;
   border-radius: 3px;
   overflow: hidden;
 }
 
 .counter-labels {
+  grid-area: labels;
   display: flex;
+  justify-content: center;
 }
 
 .counter-label {
   text-align: center;
   font-weight: 500;
-  width: 43px;
-  color: rgba(255, 255, 255, 0.3);
+  width: 33px;
+  color: var(--low-white);
   font-size: 13px;
   font-family: Oxanium, cursive;
 }
 
+@media screen and (min-width: 500px) {
+  .counter-label {
+    width: 43px;
+  }
+}
+
 .increment-wrapper {
-  width: 43px;
-  height: 41px;
+  width: 33px;
+  height: 37px;
+}
+
+@media screen and (min-width: 500px) {
+  .increment-wrapper {
+    width: 43px;
+    height: 41px;
+  }
 }
 
 .increment-wrapper:not(:first-child) {
@@ -101,10 +170,27 @@
 .numbers-slider > div {
   font-weight: 500;
   font-family: Oxanium, cursive;
-  font-size: 18px;
-  color: rgba(255,255,255,0.3);
-  height: 41px;
+  font-size: 14px;
+  color: var(--low-white);
+  height: 37px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media screen and (min-width: 500px) {
+  .numbers-slider > div {
+    font-size: 18px;
+    height: 41px;
+  }
+}
+
+#reset {
+  align-self: flex-end;
+}
+
+@media screen and (min-width: 500px) {
+  #reset {
+    align-self: center;
+  }
 }
