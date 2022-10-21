@@ -10,7 +10,8 @@
   justify-content: space-evenly;
   padding-top: 36px;
   position: relative;
-  width: 100%;
+  border-top: 2px solid var(--section-gray);
+  width: min(100%, 400px);
 }
 
 .probabilities::before {
@@ -31,6 +32,7 @@
 
 @media screen and (min-width: 500px) {
   .probabilities {
+    width: 100%;
     border: none;
     padding: 0 16px 0 0;
     justify-content: space-between;
@@ -93,8 +95,8 @@
 
 @media screen and (min-width: 500px) {
   .probability-result {
-    font-size: 17px;
-    width: 86px;
+    font-size: 18px;
+    width: 92px;
   }
 }
 
@@ -129,6 +131,12 @@
   background-color: var(--simulator-black);
   border-radius: 3px;
   z-index: -1;
+}
+
+@media screen and (min-width: 500px) {
+  .probability-wrapper.highlight::before {
+    inset: 3px;
+  }
 }
 
 .probability-digit {

@@ -101,7 +101,7 @@ function drawMatrix() {
 }
 
 function drawGrid() {
-  ctx.strokeStyle = "#151515";
+  ctx.strokeStyle = "#202020";
   ctx.beginPath();
 
   for (let row = 1; row < numberOfSquares; row++) {

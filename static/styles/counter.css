@@ -4,7 +4,6 @@
     "canvas"
     "probability"
     "counter";
-  width: 100%;
   justify-items: center;
 }
   
@@ -27,11 +26,12 @@
   display: flex;
   flex-direction: column;
   border-top: 2px solid var(--section-gray);
-  padding-top: 36px;
+  padding: 36px 16px;
   position: relative;
   align-items: center;
   margin: 80px 0;
   gap: 16px;
+  width: min(100%, 400px);
 }
 
 @media screen and (min-width: 500px) {
@@ -63,7 +63,8 @@
   display: flex;
   align-items: flex-end;
   flex-direction: column;
-  row-gap: 16px;
+  row-gap: 24px;
+  width: 100%;
 }
 
 @media screen and (min-width: 500px) {
@@ -80,6 +81,7 @@
     "counters";
   align-items: center;
   row-gap: 12px;
+  width: 100%;
 }
 
 
@@ -89,6 +91,7 @@
       ". labels"
       "name counters";
     column-gap: 16px;
+    width: initial;
   }
 
   .counter-model:nth-child(2) {
@@ -121,36 +124,40 @@
   display: flex;
   border-radius: 3px;
   overflow: hidden;
+  width: 100%;
 }
 
 .counter-labels {
   grid-area: labels;
   display: flex;
-  justify-content: center;
+  width: 100%;
 }
 
 .counter-label {
   text-align: center;
   font-weight: 500;
-  width: 33px;
+  flex: 1 0 33px;
   color: var(--low-white);
-  font-size: 13px;
+  font-size: 11px;
   font-family: Oxanium, cursive;
 }
 
 @media screen and (min-width: 500px) {
   .counter-label {
+    flex: initial;
+    font-size: 13px;
     width: 43px;
   }
 }
 
 .increment-wrapper {
-  width: 33px;
+  flex: 1 0 33px;
   height: 37px;
 }
 
 @media screen and (min-width: 500px) {
   .increment-wrapper {
+    flex: initial;
     width: 43px;
     height: 41px;
   }
